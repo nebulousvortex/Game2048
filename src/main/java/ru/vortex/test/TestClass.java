@@ -1,0 +1,14 @@
+package main.java.ru.vortex.test;
+
+import main.java.ru.vortex.board.Board;
+import main.java.ru.vortex.board.SquareBoard;
+import main.java.ru.vortex.game.Game;
+import main.java.ru.vortex.game.Game2048;
+
+public class TestClass {
+    public static void main(String[] args){
+        Board board= new SquareBoard(4);
+        Game game2048 = new Game2048(board);
+        System.out.println(game2048.canMove());
+    }
+}
