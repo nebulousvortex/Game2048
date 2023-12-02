@@ -1,7 +1,7 @@
 package main.java.ru.vortex.assistants;
 
 public class Key {
-    int i, j;
+    private int i, j;
 
     public Key(int i, int j) {
         this.i = i;

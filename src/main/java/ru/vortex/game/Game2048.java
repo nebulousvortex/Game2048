@@ -7,9 +7,9 @@ import main.java.ru.vortex.assistants.GameHelper;
 import java.util.Random;
 
 public class Game2048 implements Game {
-    GameHelper helper = new GameHelper();
-    Board board;
-    Random random = new Random();
+    private GameHelper helper = new GameHelper();
+    private Board board;
+    private Random random = new Random();
     public Game2048(Board board) {
         this.board = board;
     }
