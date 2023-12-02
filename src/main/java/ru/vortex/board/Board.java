@@ -1,13 +1,13 @@
 package main.java.ru.vortex.board;
 
-import java.security.Key;
+import main.java.ru.vortex.assistants.Key;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public abstract class Board {
-    private int width, height;
-    private Map<Key, Integer> board = new HashMap<>();
+    protected int width, height;
+    protected Map<Key, Integer> board = new HashMap<>();
 
     public Board(int width, int height) {
         this.width = width;
@@ -15,6 +15,9 @@ public abstract class Board {
     }
 
     public abstract void fillBoard(List<Integer> list);
+
+    public abstract void addItem(Key key, Integer value);
+    public abstract List<Key> availableSpace();
 
     public abstract List<Key> availableItem(Key key, Integer value);
 
