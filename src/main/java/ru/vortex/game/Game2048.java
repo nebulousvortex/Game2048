@@ -16,7 +16,7 @@ public class Game2048 implements Game {
 
     @Override
     public void init() {
-
+        //this.board.fillBoard();
     }
 
     @Override

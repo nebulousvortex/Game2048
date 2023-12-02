@@ -10,6 +10,7 @@ public class SquareBoard extends Board {
     }
     @Override
     public void fillBoard(List<Integer> list) {
+        this.board.clear();
         ListIterator<Integer> listIterator = list.listIterator();
         for(int i = 0; i<this.width; i++){
             for(int j = 0; j<this.height; j++){
@@ -26,12 +27,13 @@ public class SquareBoard extends Board {
     @Override
     public List<Key> availableSpace() {
         List<Key> spaces = new ArrayList<>();
-        for (Map.Entry<Key, Integer> entry : this.board.entrySet()){
-            if (entry.getValue() == null){
-                spaces.add(entry.getKey());
+        for (Map.Entry<Key, Integer> entry : this.board.entrySet()) {
+            Key key = entry.getKey();
+            if (entry.getValue() == null) {
+                spaces.add(key);
             }
         }
-        return null;
+        return spaces;
     }
 
     @Override
@@ -41,7 +43,12 @@ public class SquareBoard extends Board {
 
     @Override
     public Key getKey(int i, int j) {
-        return new Key(i, j);
+        for (Map.Entry<Key, Integer> entry : this.board.entrySet()) {
+            if (entry.getKey().getI() == i & entry.getKey().getJ() == j) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -52,8 +59,8 @@ public class SquareBoard extends Board {
     @Override
     public List<Key> getColumn(int i) {
         List<Key> columnKeys = new ArrayList<>();
-        for(int j = 0; i<this.height; j++){
-            columnKeys.add(new Key(j,i));
+        for(int j = 0; j<this.height; j++){
+            columnKeys.add(this.getKey(j,i));
         }
         return columnKeys;
     }
@@ -61,8 +68,8 @@ public class SquareBoard extends Board {
     @Override
     public List<Key> getRow(int i) {
         List<Key> rowKeys = new ArrayList<>();
-        for(int j = 0; i<this.height; j++){
-            rowKeys.add(new Key(i,j));
+        for(int j = 0; j<this.height; j++){
+            rowKeys.add(this.getKey(i,j));
         }
         return rowKeys;
     }
