@@ -23,6 +23,10 @@ public abstract class Board {
 
     public abstract Key getKey(int i, int j);
 
+    public void setBoard(Key key, Integer value) {
+        this.board.put(key, value);
+    }
+
     public abstract Integer getValue(Key key);
 
     public abstract List<Key> getColumn(int i);
@@ -33,4 +37,11 @@ public abstract class Board {
 
     public abstract List<Integer> getValues(List<Key> keys);
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

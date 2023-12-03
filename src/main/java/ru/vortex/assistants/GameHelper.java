@@ -3,6 +3,10 @@ package main.java.ru.vortex.assistants;
 import java.util.*;
 
 public class GameHelper {
+
+    /*
+    * Moves the values and adds the same and adjacent ones
+     */
     public List<Integer> moveAndMergeEqual(List<Integer> nullList){
         if(checkFullNull(nullList)) {
             int size = nullList.size();
@@ -17,6 +21,9 @@ public class GameHelper {
         return nullList;
     }
 
+    /*
+     *Checks whether the received List does not consist entirely of null
+     */
     public boolean checkFullNull(List<Integer> nullList){
         Iterator<Integer> iterator = nullList.iterator();
         int count = 0;
@@ -28,6 +35,9 @@ public class GameHelper {
         return !(count == nullList.size());
     }
 
+    /*
+     *Adds null to the size of the List
+     */
     public List<Integer> addNulls(List<Integer> newList, int size){
         if (newList.size() != size) {
             for (int j = newList.size(); j < size; j++) {
@@ -36,7 +46,9 @@ public class GameHelper {
         }
         return newList;
     }
-
+    /*
+     *Adds equal values
+     */
     public List<Integer> merge(List<Integer> list){
         int i = 0;
         Iterator<Integer> iterator = list.iterator();
