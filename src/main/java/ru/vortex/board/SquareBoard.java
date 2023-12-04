@@ -46,14 +46,6 @@ public class SquareBoard extends Board {
     }
 
     /*
-     *Not doing anything yet
-     */
-    @Override
-    public List<Key> availableItem(Key key, Integer value) {
-        return null;
-    }
-
-    /*
      *Gets the Key by coordinates from the board
      */
     @Override

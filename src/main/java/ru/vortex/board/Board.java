@@ -19,8 +19,6 @@ public abstract class Board {
     public abstract void addItem(Key key, Integer value);
     public abstract List<Key> availableSpace();
 
-    public abstract List<Key> availableItem(Key key, Integer value);
-
     public abstract Key getKey(int i, int j);
 
     public void setBoard(Key key, Integer value) {
