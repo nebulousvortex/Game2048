@@ -6,17 +6,14 @@ import main.java.ru.vortex.assistants.Direction;
 import main.java.ru.vortex.assistants.GameHelper;
 import main.java.ru.vortex.board.SquareBoard;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 
-import static java.util.Collections.*;
 import static java.util.Collections.reverse;
 
 public class Game2048 implements Game {
     private GameHelper helper;
-    private SquareBoard board;
+    private final SquareBoard board;
     private Random random = new Random();
     public Game2048(SquareBoard board) {
         this.board = board;
