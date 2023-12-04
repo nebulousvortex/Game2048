@@ -104,9 +104,8 @@ public class SquareBoard extends Board {
     @Override
     public List<Integer> getValues(List<Key> keys) {
         List<Integer> values = new ArrayList<>();
-        ListIterator<Key> listIterator = keys.listIterator();
-        while(listIterator.hasNext()){
-            values.add(this.board.get(listIterator.next()));
+        for (Key key : keys) {
+            values.add(this.board.get(key));
         }
         return values;
     }
