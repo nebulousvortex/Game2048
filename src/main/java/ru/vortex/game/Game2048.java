@@ -75,12 +75,7 @@ public class Game2048 implements Game {
     @Override
     public void addItem() {
         List<Key> spaces = board.availableSpace();
-        ListIterator<Key> listIterator = spaces.listIterator();
-        while(listIterator.hasNext()) {
-            if (random.nextFloat() > 0.7f) {
-                board.setBoard(listIterator.next(), random.nextInt(16));
-            }
-        }
+        board.setBoard(spaces.get(random.nextInt(spaces.size()-1)), random.nextInt(16));
     }
 
     /*
