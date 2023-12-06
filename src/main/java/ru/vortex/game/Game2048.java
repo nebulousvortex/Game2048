@@ -3,10 +3,8 @@ package main.java.ru.vortex.game;
 import main.java.ru.vortex.assistants.Key;
 import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.assistants.Direction;
-import main.java.ru.vortex.assistants.GameHelper;
+import main.java.ru.vortex.helper.GameHelper;
 import main.java.ru.vortex.board.SquareBoard;
-
-import java.util.List;
 import java.util.Random;
 
 import static java.util.Collections.reverse;
@@ -27,6 +25,7 @@ public class Game2048 implements Game {
     public void init(){
         helper = new GameHelper();
         random = new Random();
+        board.fillBoard(random);
     }
 
     /*
@@ -43,24 +42,24 @@ public class Game2048 implements Game {
     @Override
     public void move(Direction direction) {
         if (direction == Direction.RIGHT){
-            for(int i = 0; i<board.getHeight(); i++){
-                List<Integer> values = helper.moveAndMergeEqual(board.getValueRow(i));
+            for(var i = 0; i < board.getHeight(); i++){
+                var values = helper.moveAndMergeEqual(board.getValueRow(i));
                 reverse(values);
             }
         }
         if (direction == Direction.LEFT){
-            for(int i = 0; i<board.getHeight(); i++){
+            for(var i = 0; i < board.getHeight(); i++){
                 helper.moveAndMergeEqual(board.getValueRow(i));
             }
         }
         if (direction == Direction.UP){
-            for(int i = 0; i<board.getWidth(); i++){
+            for(var i = 0; i < board.getWidth(); i++){
                 helper.moveAndMergeEqual(board.getValueColumn(i));
             }
         }
         if (direction == Direction.DOWN){
-            for(int i = 0; i<board.getWidth(); i++){
-                List<Integer> values = helper.moveAndMergeEqual(board.getValueColumn(i));
+            for(var i = 0; i < board.getWidth(); i++){
+                var values = helper.moveAndMergeEqual(board.getValueColumn(i));
                 reverse(values);
             }
         }
@@ -71,8 +70,8 @@ public class Game2048 implements Game {
      */
     @Override
     public void addItem() {
-        List<Key> spaces = board.availableSpace();
-        board.setBoard(spaces.get(random.nextInt(spaces.size()-1)), random.nextInt(16));
+        var spaces = board.availableSpace();
+        board.setBoard(spaces.get(random.nextInt(spaces.size()-1)), (int) Math.pow(2, random.nextInt(4)));
     }
 
     /*
