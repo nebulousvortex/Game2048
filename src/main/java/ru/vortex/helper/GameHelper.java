@@ -1,4 +1,4 @@
-package main.java.ru.vortex.assistants;
+package main.java.ru.vortex.helper;
 
 import java.util.*;
 
@@ -7,32 +7,32 @@ public class GameHelper {
     /*
     * Moves the values and adds the same and adjacent ones
      */
-    public List<Integer> moveAndMergeEqual(List<Integer> nullList){
-        if(checkFullNull(nullList)) {
-            int size = nullList.size();
-            List<Integer> list = new ArrayList<>(nullList);
-            if (list.contains(null)) {
-                list.removeAll(Collections.singleton(null));
+    public List<Integer> moveAndMergeEqual(List<Integer> listWithNull){
+        if(!checkFullNull(listWithNull)) {
+            var size = listWithNull.size();
+            var listNoNull = new ArrayList<>(listWithNull);
+            if (listNoNull.contains(null)) {
+                listNoNull.removeAll(Collections.singleton(null));
             }
-            List<Integer> newList = merge(list);
-            newList = addNulls(newList, size);
-            return newList;
+            List<Integer> mergedList = merge(listNoNull);
+            mergedList = addNulls(mergedList, size);
+            return mergedList;
         }
-        return nullList;
+        return listWithNull;
     }
 
     /*
      *Checks whether the received List does not consist entirely of null
      */
     public boolean checkFullNull(List<Integer> nullList){
-        Iterator<Integer> iterator = nullList.iterator();
-        int count = 0;
+        var iterator = nullList.iterator();
+        var count = 0;
         while (iterator.hasNext()){
             if (iterator.next() == null){
                 count++;
             }
         }
-        return !(count == nullList.size());
+        return count == nullList.size();
     }
 
     /*
@@ -40,7 +40,7 @@ public class GameHelper {
      */
     public List<Integer> addNulls(List<Integer> newList, int size){
         if (newList.size() != size) {
-            for (int j = newList.size(); j < size; j++) {
+            for (var j = newList.size(); j < size; j++) {
                 newList.add(null);
             }
         }
@@ -50,12 +50,12 @@ public class GameHelper {
      *Adds equal values
      */
     public List<Integer> merge(List<Integer> list){
-        int i = 0;
-        Iterator<Integer> iterator = list.iterator();
+        var i = 0;
+        var iterator = list.iterator();
         List<Integer> newList = new ArrayList<>();
         newList.add(iterator.next());
         while (iterator.hasNext()) {
-            int current = iterator.next();
+            var current = iterator.next();
             if (newList.get(i).equals(current)) {
                 newList.set(i, 2 * current);
                 if (iterator.hasNext()) {
