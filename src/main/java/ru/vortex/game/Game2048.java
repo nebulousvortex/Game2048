@@ -1,6 +1,5 @@
 package main.java.ru.vortex.game;
 
-import main.java.ru.vortex.assistants.Key;
 import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.assistants.Direction;
 import main.java.ru.vortex.helper.GameHelper;

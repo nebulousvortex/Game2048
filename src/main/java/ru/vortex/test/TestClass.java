@@ -1,11 +1,8 @@
 package main.java.ru.vortex.test;
 
-import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.board.SquareBoard;
 import main.java.ru.vortex.game.Game;
 import main.java.ru.vortex.game.Game2048;
-
-import java.util.*;
 
 public class TestClass {
     public static void main(String[] args){
