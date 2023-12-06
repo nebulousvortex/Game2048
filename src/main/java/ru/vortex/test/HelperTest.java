@@ -1,6 +1,6 @@
 package main.java.ru.vortex.test;
 
-import main.java.ru.vortex.assistants.GameHelper;
+import main.java.ru.vortex.helper.GameHelper;
 
 import java.util.List;
 
