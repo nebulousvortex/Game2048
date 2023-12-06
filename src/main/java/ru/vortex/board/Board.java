@@ -4,36 +4,39 @@ import main.java.ru.vortex.assistants.Key;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
-public abstract class Board {
+public abstract class Board<K, V> {
     protected int width, height;
-    protected Map<Key, Integer> board = new HashMap<>();
+    protected Map<K, V> board = new HashMap<>();
 
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
-    public abstract void fillBoard(List<Integer> list);
+    public abstract void fillBoard(List<V> list);
 
-    public abstract void addItem(Key key, Integer value);
-    public abstract List<Key> availableSpace();
+    public abstract void fillBoard(Random random);
 
-    public abstract Key getKey(int i, int j);
+    public abstract void addItem(K key, V value);
+    public abstract List<K> availableSpace();
 
-    public void setBoard(Key key, Integer value) {
+    public abstract K getKey(int i, int j);
+
+    public void setBoard(K key, V value) {
         this.board.put(key, value);
     }
 
-    public abstract Integer getValue(Key key);
+    public abstract V getValue(K key);
 
-    public abstract List<Key> getColumn(int i);
+    public abstract List<K> getColumn(int i);
 
-    public abstract List<Key> getRow(int i);
+    public abstract List<K> getRow(int i);
 
-    public abstract boolean hasValue(Integer value);
+    public abstract boolean hasValue(V value);
 
-    public abstract List<Integer> getValues(List<Key> keys);
+    public abstract List<V> getValues(List<K> keys);
 
     public int getWidth() {
         return width;

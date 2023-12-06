@@ -3,7 +3,8 @@ import main.java.ru.vortex.assistants.Key;
 
 import java.util.*;
 
-public class SquareBoard extends Board {
+public class SquareBoard<V extends Number> extends Board<Key, V> {
+
     public SquareBoard(int size) {
         super(size, size);
     }
@@ -11,22 +12,22 @@ public class SquareBoard extends Board {
     /*
      *Fills the board with values from the List
      */
-    @Override
-    public void fillBoard(List<Integer> list) {
-        board.clear();
-        var listIterator = list.listIterator();
-        for(var i = 0; i < width; i++){
-            for(var j = 0; j < height; j++){
-                addItem(new Key(i, j), listIterator.next());
+    public void fillBoard(List<V> list) {
+        this.board.clear();
+        ListIterator<V> listIterator = list.listIterator();
+        for(int i = 0; i<this.width; i++){
+            for(int j = 0; j<this.height; j++){
+                this.addItem(new Key(i,j), listIterator.next());
             }
         }
     }
 
+    @Override
     public void fillBoard(Random random) {
         board.clear();
         for(var i = 0; i < width; i++){
             for(var j = 0; j < height; j++){
-                addItem(new Key(i, j), (int) Math.pow(2, random.nextInt(4)));
+                addItem(new Key(i, j), (V) Math.pow(2, random.nextInt(4)));
             }
         }
     }
@@ -35,8 +36,8 @@ public class SquareBoard extends Board {
      *Adds a value by key
      */
     @Override
-    public void addItem(Key key, Integer value) {
-        board.put(key, value);
+    public void addItem(Key key, V value) {
+        this.board.put(key, value);
     }
 
     /*
@@ -45,8 +46,8 @@ public class SquareBoard extends Board {
     @Override
     public List<Key> availableSpace() {
         List<Key> spaces = new ArrayList<>();
-        for (var entry : board.entrySet()) {
-            var key = entry.getKey();
+        for (Map.Entry<Key, V> entry : this.board.entrySet()) {
+            Key key = entry.getKey();
             if (entry.getValue() == null) {
                 spaces.add(key);
             }
@@ -59,7 +60,7 @@ public class SquareBoard extends Board {
      */
     @Override
     public Key getKey(int i, int j) {
-        for (var entry : board.entrySet()) {
+        for (Map.Entry<Key, V> entry : this.board.entrySet()) {
             if (entry.getKey().getI() == i & entry.getKey().getJ() == j) {
                 return entry.getKey();
             }
@@ -71,8 +72,8 @@ public class SquareBoard extends Board {
      *Gets the Value
      */
     @Override
-    public Integer getValue(Key key) {
-        return board.get(key);
+    public V getValue(Key key) {
+        return this.board.get(key);
     }
 
     /*
@@ -81,8 +82,8 @@ public class SquareBoard extends Board {
     @Override
     public List<Key> getColumn(int i) {
         List<Key> columnKeys = new ArrayList<>();
-        for(var j = 0; j < height; j++){
-            columnKeys.add(getKey(j, i));
+        for(int j = 0; j<this.height; j++){
+            columnKeys.add(this.getKey(j,i));
         }
         return columnKeys;
     }
@@ -93,8 +94,8 @@ public class SquareBoard extends Board {
     @Override
     public List<Key> getRow(int i) {
         List<Key> rowKeys = new ArrayList<>();
-        for(var j = 0; j < height; j++){
-            rowKeys.add(getKey(i, j));
+        for(int j = 0; j<this.height; j++){
+            rowKeys.add(this.getKey(i,j));
         }
         return rowKeys;
     }
@@ -103,18 +104,18 @@ public class SquareBoard extends Board {
      *Checks for the presence of a value
      */
     @Override
-    public boolean hasValue(Integer value) {
-        return board.containsValue(value);
+    public boolean hasValue(V value) {
+        return this.board.containsValue(value);
     }
 
     /*
      *Checks Values
      */
     @Override
-    public List<Integer> getValues(List<Key> keys) {
-        List<Integer> values = new ArrayList<>();
-        for (var key : keys) {
-            values.add(board.get(key));
+    public List<V> getValues(List<Key> keys) {
+        List<V> values = new ArrayList<>();
+        for (Key key : keys) {
+            values.add(this.board.get(key));
         }
         return values;
     }
@@ -122,14 +123,14 @@ public class SquareBoard extends Board {
     /*
      *Returns Column Values
      */
-    public List<Integer> getValueRow(int i){
+    public List<V> getValueRow(int i){
         return getValues(getRow(i));
     }
 
     /*
      *Returns Column Values
      */
-    public List<Integer> getValueColumn(int i){
+    public List<V> getValueColumn(int i){
         return getValues(getColumn(i));
     }
 
