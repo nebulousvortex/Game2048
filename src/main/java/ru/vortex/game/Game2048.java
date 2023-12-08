@@ -29,7 +29,6 @@ public class Game2048 implements Game {
      */
     @Override
     public void init(){
-
         board.fillBoard(asList(2,2));
     }
 
@@ -46,45 +45,45 @@ public class Game2048 implements Game {
      */
     @Override
     public void move(Direction direction) {
-        if (direction == Direction.RIGHT){
-            for(var i = 0; i < board.getHeight(); i++){
-                List currentValues = board.getValueRow(i);
-                reverse(currentValues);
-                List newValues = helper.moveAndMergeEqual(currentValues);
-                reverse(newValues);
-                for(var j = 0; j < board.getHeight(); j++){
-                    board.setBoard(board.getKey(i, j), newValues.get(j));
+        if(canMove()) {
+            if (direction == Direction.RIGHT) {
+                for (var i = 0; i < board.getHeight(); i++) {
+                    List currentValues = board.getValueRow(i);
+                    reverse(currentValues);
+                    List newValues = helper.moveAndMergeEqual(currentValues);
+                    reverse(newValues);
+                    for (var j = 0; j < board.getHeight(); j++) {
+                        board.setBoard(board.getKey(i, j), newValues.get(j));
+                    }
                 }
             }
-        }
-        if (direction == Direction.LEFT){
-            for(var i = 0; i < board.getHeight(); i++){
-                List newValues = helper.moveAndMergeEqual(board.getValueRow(i));
-                for(var j = 0; j < board.getWidth(); j++){
-                    board.setBoard(board.getKey(i, j), newValues.get(j));
+            if (direction == Direction.LEFT) {
+                for (var i = 0; i < board.getHeight(); i++) {
+                    List newValues = helper.moveAndMergeEqual(board.getValueRow(i));
+                    for (var j = 0; j < board.getWidth(); j++) {
+                        board.setBoard(board.getKey(i, j), newValues.get(j));
+                    }
                 }
             }
-        }
-        if (direction == Direction.UP){
-            for(var i = 0; i < board.getWidth(); i++){
-                List newValues = helper.moveAndMergeEqual(board.getValueColumn(i));
-                for(var j = 0; j < board.getWidth(); j++){
-                    board.setBoard(board.getKey(j, i), newValues.get(j));
+            if (direction == Direction.UP) {
+                for (var i = 0; i < board.getWidth(); i++) {
+                    List newValues = helper.moveAndMergeEqual(board.getValueColumn(i));
+                    for (var j = 0; j < board.getWidth(); j++) {
+                        board.setBoard(board.getKey(j, i), newValues.get(j));
+                    }
                 }
             }
-        }
-        if (direction == Direction.DOWN){
-            for(var i = 0; i < board.getWidth(); i++){
+            if (direction == Direction.DOWN) for (var i = 0; i < board.getWidth(); i++) {
                 List currentValues = board.getValueColumn(i);
                 reverse(currentValues);
                 List newValues = helper.moveAndMergeEqual(currentValues);
                 reverse(newValues);
-                for(var j = 0; j < board.getWidth(); j++){
+                for (var j = 0; j < board.getWidth(); j++) {
                     board.setBoard(board.getKey(j, i), newValues.get(j));
                 }
             }
+            this.addItem();
         }
-        this.addItem();
     }
 
     /*
