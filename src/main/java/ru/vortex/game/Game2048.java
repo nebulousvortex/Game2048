@@ -1,20 +1,27 @@
 package main.java.ru.vortex.game;
 
+import main.java.ru.vortex.assistants.Key;
 import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.assistants.Direction;
 import main.java.ru.vortex.helper.GameHelper;
 import main.java.ru.vortex.board.SquareBoard;
+
+import java.util.List;
 import java.util.Random;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
 
 public class Game2048 implements Game {
     private GameHelper helper;
-    private final SquareBoard board;
+    private SquareBoard board;
     private Random random = new Random();
-    public Game2048(SquareBoard board) {
-        this.board = board;
-        this.init();
+
+    public static final int GAME_SIZE = 4;
+    public Game2048( ) {
+        helper = new GameHelper();
+        random = new Random();
+        board = new SquareBoard<>(GAME_SIZE);
     }
 
     /*
@@ -22,9 +29,8 @@ public class Game2048 implements Game {
      */
     @Override
     public void init(){
-        helper = new GameHelper();
-        random = new Random();
-        board.fillBoard(random);
+
+        board.fillBoard(asList(2,2));
     }
 
     /*
@@ -42,26 +48,43 @@ public class Game2048 implements Game {
     public void move(Direction direction) {
         if (direction == Direction.RIGHT){
             for(var i = 0; i < board.getHeight(); i++){
-                var values = helper.moveAndMergeEqual(board.getValueRow(i));
-                reverse(values);
+                List currentValues = board.getValueRow(i);
+                reverse(currentValues);
+                List newValues = helper.moveAndMergeEqual(currentValues);
+                reverse(newValues);
+                for(var j = 0; j < board.getHeight(); j++){
+                    board.setBoard(board.getKey(i, j), newValues.get(j));
+                }
             }
         }
         if (direction == Direction.LEFT){
             for(var i = 0; i < board.getHeight(); i++){
-                helper.moveAndMergeEqual(board.getValueRow(i));
+                List newValues = helper.moveAndMergeEqual(board.getValueRow(i));
+                for(var j = 0; j < board.getWidth(); j++){
+                    board.setBoard(board.getKey(i, j), newValues.get(j));
+                }
             }
         }
         if (direction == Direction.UP){
             for(var i = 0; i < board.getWidth(); i++){
-                helper.moveAndMergeEqual(board.getValueColumn(i));
+                List newValues = helper.moveAndMergeEqual(board.getValueColumn(i));
+                for(var j = 0; j < board.getWidth(); j++){
+                    board.setBoard(board.getKey(j, i), newValues.get(j));
+                }
             }
         }
         if (direction == Direction.DOWN){
             for(var i = 0; i < board.getWidth(); i++){
-                var values = helper.moveAndMergeEqual(board.getValueColumn(i));
-                reverse(values);
+                List currentValues = board.getValueColumn(i);
+                reverse(currentValues);
+                List newValues = helper.moveAndMergeEqual(currentValues);
+                reverse(newValues);
+                for(var j = 0; j < board.getWidth(); j++){
+                    board.setBoard(board.getKey(j, i), newValues.get(j));
+                }
             }
         }
+        this.addItem();
     }
 
     /*
@@ -69,8 +92,8 @@ public class Game2048 implements Game {
      */
     @Override
     public void addItem() {
-        var spaces = board.availableSpace();
-        board.setBoard(spaces.get(random.nextInt(spaces.size()-1)), (int) Math.pow(2, random.nextInt(4)));
+        List<Key> spaces = board.availableSpace();
+        board.setBoard(spaces.get(0), (int) Math.pow(2, random.nextInt(4)));
     }
 
     /*

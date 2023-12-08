@@ -3,7 +3,7 @@ import main.java.ru.vortex.assistants.Key;
 
 import java.util.*;
 
-public class SquareBoard<V extends Number> extends Board<Key, V> {
+public class SquareBoard<V> extends Board<Key, V> {
 
     public SquareBoard(int size) {
         super(size, size);
@@ -15,29 +15,36 @@ public class SquareBoard<V extends Number> extends Board<Key, V> {
     public void fillBoard(List<V> list) {
         this.board.clear();
         ListIterator<V> listIterator = list.listIterator();
-        for(int i = 0; i<this.width; i++){
-            for(int j = 0; j<this.height; j++){
-                this.addItem(new Key(i,j), listIterator.next());
+        for(var i = 0; i<this.width; i++){
+            for(var j = 0; j<this.height; j++){
+                if(listIterator.hasNext()) {
+                    this.addItem(new Key(i, j), listIterator.next());
+                }else {
+                    this.addItem(new Key(i, j), null);
+                }
             }
         }
     }
 
-    @Override
-    public void fillBoard(Random random) {
-        board.clear();
-        for(var i = 0; i < width; i++){
-            for(var j = 0; j < height; j++){
-                addItem(new Key(i, j), (V) Math.pow(2, random.nextInt(4)));
-            }
-        }
-    }
+//    // TODO: Узнать у преподавателя как решить эту проблему с приведением к типу.  https://stackoverflow.com/questions/72332277/java-generics-incompatible-types-int-cannot-be-converted-to-t
+//    @Override
+//    public void fillBoard(Random random) {
+//        board.clear();
+//        for(var i = 0; i < width; i++){
+//            for(var j = 0; j < height; j++){
+//                V val = (Integer) 1;
+//                V newValue = (int)(Math.pow(2, random.nextInt(4)));
+//                addItem(new Key(i, j), newValue);
+//            }
+//        }
+//    }
 
     /*
      *Adds a value by key
      */
     @Override
     public void addItem(Key key, V value) {
-        this.board.put(key, value);
+        this.board.put(key,value);
     }
 
     /*
@@ -66,6 +73,11 @@ public class SquareBoard<V extends Number> extends Board<Key, V> {
             }
         }
         return null;
+    }
+
+    @Override
+    public void setBoard(Key key, V value) {
+        board.put(key, value);
     }
 
     /*

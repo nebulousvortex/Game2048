@@ -1,10 +1,8 @@
 package main.java.ru.vortex.board;
 
 import main.java.ru.vortex.assistants.Key;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+
+import java.util.*;
 
 public abstract class Board<K, V> {
     protected int width, height;
@@ -17,7 +15,7 @@ public abstract class Board<K, V> {
 
     public abstract void fillBoard(List<V> list);
 
-    public abstract void fillBoard(Random random);
+    //public abstract void fillBoard(Random random);
 
     public abstract void addItem(K key, V value);
     public abstract List<K> availableSpace();
