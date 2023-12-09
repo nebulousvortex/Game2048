@@ -5,7 +5,6 @@ import main.java.ru.vortex.assistants.Direction;
 import main.java.ru.vortex.assistants.Key;
 import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.board.SquareBoard;
-import main.java.ru.vortex.game.Game;
 import main.java.ru.vortex.game.Game2048;
 
 import java.util.List;
@@ -48,6 +47,11 @@ public class Game2048Test {
             }
             @Override public List<Double> getValues(List<String> keys) {
                 return null;
+            }
+
+            @Override
+            public void printBoard() {
+
             }
         };
         Board<Key, Integer> b = game.getGameBoard();

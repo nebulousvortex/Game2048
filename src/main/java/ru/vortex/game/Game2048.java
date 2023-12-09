@@ -92,7 +92,9 @@ public class Game2048 implements Game {
     @Override
     public void addItem() {
         List<Key> spaces = board.availableSpace();
-        board.setBoard(spaces.get(0), (int) Math.pow(2, random.nextInt(4)));
+        var newValue = (int) Math.pow(2, random.nextInt(4));
+        if (newValue == 1){ newValue++;}
+        board.setBoard(spaces.get(random.nextInt(spaces.size())), newValue);
     }
 
     /*

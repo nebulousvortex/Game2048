@@ -27,17 +27,17 @@ public class SquareBoard<V> extends Board<Key, V> {
     }
 
 //    // TODO: Узнать у преподавателя как решить эту проблему с приведением к типу.  https://stackoverflow.com/questions/72332277/java-generics-incompatible-types-int-cannot-be-converted-to-t
-//    @Override
-//    public void fillBoard(Random random) {
-//        board.clear();
-//        for(var i = 0; i < width; i++){
-//            for(var j = 0; j < height; j++){
-//                V val = (Integer) 1;
-//                V newValue = (int)(Math.pow(2, random.nextInt(4)));
-//                addItem(new Key(i, j), newValue);
-//            }
-//        }
-//    }
+
+    public void fillBoard(Random random) {
+        board.clear();
+        for(var i = 0; i < width; i++){
+            for(var j = 0; j < height; j++){
+                V val = (Integer) 1;
+                V newValue = (int)(Math.pow(2, random.nextInt(4)));
+                addItem(new Key(i, j), newValue);
+            }
+        }
+    }
 
     /*
      *Adds a value by key
@@ -144,6 +144,17 @@ public class SquareBoard<V> extends Board<Key, V> {
      */
     public List<V> getValueColumn(int i){
         return getValues(getColumn(i));
+    }
+
+    @Override
+    public void printBoard(){
+        for (var i = 0; i < this.height; i++){
+            for (var j = 0; j < this.height; j++){
+                System.out.printf("%5s", board.get(this.getKey(i, j)), "%5s");
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
     }
 
 }
