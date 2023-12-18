@@ -43,6 +43,4 @@ public abstract class Board<K, V> {
     public int getHeight() {
         return height;
     }
-
-    public abstract void printBoard();
 }

@@ -33,11 +33,6 @@ public class Game2048Test {
             @Override public List<String> getRow(int i) {return null;}
             @Override public boolean hasValue(Double value) {return false;}
             @Override public List<Double> getValues(List<String> keys) {return null;}
-
-            @Override
-            public void printBoard() {
-
-            }
         };
         Board<Key, Integer> b = game.getGameBoard();
         if (!b.availableSpace().isEmpty()) throw new RuntimeException("Game board must be empty before initialize");
