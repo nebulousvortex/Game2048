@@ -3,7 +3,6 @@ package main.java.ru.vortex.game;
 import main.java.ru.vortex.assistants.Key;
 import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.assistants.Direction;
-import main.java.ru.vortex.exception.NotEnoughtSpace;
 import main.java.ru.vortex.helper.GameHelper;
 import main.java.ru.vortex.board.SquareBoard;
 
@@ -45,7 +44,7 @@ public class Game2048 implements Game {
      *Moves and adds values
      */
     @Override
-    public boolean move(Direction direction) {
+    public void move(Direction direction) {
         if(canMove()) {
             if (direction == Direction.RIGHT) {
                 for (var i = 0; i < board.getHeight(); i++) {
@@ -83,24 +82,16 @@ public class Game2048 implements Game {
                     board.setBoard(board.getKey(j, i), newValues.get(j));
                 }
             }
-            try {
-                this.addItem();
-            } catch (NotEnoughtSpace e) {
-                throw new RuntimeException(e);
-            }
+            this.addItem();
         }
-        return true;
     }
 
     /*
      *Fills random empty values with a random number
      */
     @Override
-    public void addItem() throws NotEnoughtSpace {
+    public void addItem() {
         List<Key> spaces = board.availableSpace();
-        if(spaces.size() == 0){
-            throw new NotEnoughtSpace("некуда добавить клетку");
-        }
         board.setBoard(spaces.get(0), (int) Math.pow(2, random.nextInt(4)));
     }
 
