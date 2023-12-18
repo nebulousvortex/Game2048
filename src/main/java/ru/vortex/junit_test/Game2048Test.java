@@ -1,5 +1,9 @@
 package main.java.ru.vortex.junit_test;
+import main.java.ru.vortex.exception.NotEnoughtSpace;
 import org.junit.jupiter.api.Test;
+
+import static main.java.ru.vortex.game.Game2048.GAME_SIZE;
+import static main.java.ru.vortex.test.Game2048Test.game;
 import static org.junit.jupiter.api.Assertions.*;
 import main.java.ru.vortex.assistants.Direction;
 import main.java.ru.vortex.assistants.Key;
@@ -67,8 +71,23 @@ public class Game2048Test {
         game.init();
         if (b.availableSpace().size() != 14) throw new RuntimeException("init must be add 2 item");
         if (!game.canMove()) throw new RuntimeException("canMove not work =(");
-        game.addItem();
+        try {
+            game.addItem();
+        } catch (NotEnoughtSpace e) {
+            throw new RuntimeException(e);
+        }
         if (b.availableSpace().size() != 13) throw new RuntimeException("addItem must be add 1 item");
     }
 
+    @Test
+    void init_exception() throws NotEnoughtSpace {
+        game.init();
+        for (var i = 0; i < GAME_SIZE * GAME_SIZE - 2; i++) {
+            game.addItem();
+        }
+        assertThrows(NotEnoughtSpace.class, game::addItem);
+    }
+
+
 }
+

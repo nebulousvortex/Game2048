@@ -13,6 +13,13 @@ public class SquareBoard<V> extends Board<Key, V> {
      *Fills the board with values from the List
      */
     public void fillBoard(List<V> list) {
+        if(list.size() > (4 * 4)){
+            System.out.println(list.size());
+            throw new RuntimeException("Стартовый список больше карты");
+        }
+        else {
+            System.out.println(list.size());
+        }
         this.board.clear();
         ListIterator<V> listIterator = list.listIterator();
         for(var i = 0; i<this.width; i++){
@@ -25,19 +32,6 @@ public class SquareBoard<V> extends Board<Key, V> {
             }
         }
     }
-
-//    // TODO: Узнать у преподавателя как решить эту проблему с приведением к типу.  https://stackoverflow.com/questions/72332277/java-generics-incompatible-types-int-cannot-be-converted-to-t
-//    @Override
-//    public void fillBoard(Random random) {
-//        board.clear();
-//        for(var i = 0; i < width; i++){
-//            for(var j = 0; j < height; j++){
-//                V val = (Integer) 1;
-//                V newValue = (int)(Math.pow(2, random.nextInt(4)));
-//                addItem(new Key(i, j), newValue);
-//            }
-//        }
-//    }
 
     /*
      *Adds a value by key

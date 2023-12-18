@@ -4,6 +4,7 @@ import main.java.ru.vortex.assistants.Direction;
 import main.java.ru.vortex.assistants.Key;
 import main.java.ru.vortex.board.Board;
 import main.java.ru.vortex.board.SquareBoard;
+import main.java.ru.vortex.exception.NotEnoughtSpace;
 import main.java.ru.vortex.game.Game;
 import main.java.ru.vortex.game.Game2048;
 
@@ -12,9 +13,9 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class Game2048Test {
-    private final static Game game = new Game2048();
+    public final static Game game = new Game2048();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotEnoughtSpace {
 
         Board<Key, String> b2 = new SquareBoard<>(1);
         b2.fillBoard(asList("hello"));
